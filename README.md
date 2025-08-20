@@ -1,4 +1,12 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Next.js Semantic Segmentation App
+
+This is a Next.js project bootstrapped with create-next-app.
+It demonstrates semantic segmentation to detect and highlight animals in images.
+
+
+https://github.com/user-attachments/assets/ca7687bc-849f-49b5-9cea-16434284a29d
+
+
 
 ## Getting Started
 
