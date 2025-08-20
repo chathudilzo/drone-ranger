@@ -80,8 +80,12 @@ export default function Home() {
   }, []);
 
   const runSegmentation = async () => {
-    if (!model || !image) return;
     setLoading(true);
+    if (!model || !image) {
+      setLoading(false);
+      return;
+    }
+
     const imgElement = document.getElementById("input-image");
     const { legend, segmentationMap } = await model.segment(imgElement);
     console.log("Legend:", legend);
@@ -163,12 +167,23 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center justify-center  w-full px-32 py-6">
-      <h1 className="text-white text-5xl font-bold text-center mt-10">
-        Drone Ranger
-      </h1>
-      <p className="text-gray-500 mt-5">
-        Detect & count wild animals using (PASCAL VOC) datasets
-      </p>
+      <div className="grid grid-cols-2 gap-4 justify-between items-center p-12">
+        <div>
+          <h1 className="text-white text-5xl font-bold  mt-10 text-start">
+            Drone Ranger
+          </h1>
+          <p className="text-gray-500 mt-5">
+            An ML solution to Detect wild animals in drone shots, Detect & count
+            wild animals using (PASCAL VOC) datasets
+          </p>
+          <button className="px-3 py-2 bg-blue-600 rounded-3xl mt-5">
+            Scan Now
+          </button>
+        </div>
+        <div>
+          <Image src={"/logo.png"} alt="" width={800} height={800} />
+        </div>
+      </div>
 
       {!loading ? (
         <input
@@ -197,7 +212,7 @@ export default function Home() {
                 }
               }}
             />
-            <div className="flex flex-row mt-5 gap-10">
+            <div className="flex flex-row justify-center items-center gap-5 mt-5">
               <canvas ref={canvasRef} className="  " />
               <div>
                 <h4 className="text-white text-2xl font-bold text-center mt-10">
@@ -226,6 +241,25 @@ export default function Home() {
       ) : (
         <p>Loading...</p>
       )}
+
+      <div className="px-32 mt-10">
+        <h3 className="text-white text-2xl font-bold text-center mt-10">
+          What is Semantic segmentation
+        </h3>
+        <div className="grid grid-cols-2 gap-4 justify-between items-center mt-10">
+          <p>
+            Semantic segmentation is a computer vision technique where every
+            pixel in an image is classified into a category, so instead of just
+            saying “there is a cat in this image,” the model colors each pixel
+            to show exactly where the cat is. For example, in a street photo,
+            semantic segmentation can label pixels as “road,” “car,”
+            “pedestrian,” or “building,” giving a detailed understanding of the
+            whole scene. It’s like turning an image into a coloring book where
+            each color represents a different object or region type.
+          </p>
+          <Image src={"/image.png"} alt="" width={800} height={800} />
+        </div>
+      </div>
     </div>
   );
 }
